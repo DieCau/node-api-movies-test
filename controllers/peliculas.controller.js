@@ -1,54 +1,65 @@
-const fs = require('fs');
-const path = require('path')
+import { readFileSync, writeFileSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
-const filePath = path.join(__dirname, '../data/peliculas.json');
+// ✅ Esta parte reemplaza __dirname en ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const filePath = join(__dirname, '../data/peliculas.json');
 
 const leerPeliculas = () => {
-  const data = fs.readFileSync(filePath, 'utf-8');
+  const data = readFileSync(filePath, 'utf-8');
   return JSON.parse(data);
 };
 
 const guardarPeliculas = (peliculas) => {
-  fs.writeFileSync(filePath, JSON.stringify(peliculas, null, 2));
+  writeFileSync(filePath, JSON.stringify(peliculas, null, 2));
 };
 
-exports.getPeliculas = (req, res) => {
+export function getPeliculas(req, res) {
   const peliculas = leerPeliculas();
   res.json(peliculas);
-};
+}
 
-exports.getPeliculaPorId = (req, res) => {
+export function getPeliculaPorId(req, res) {
   const peliculas = leerPeliculas();
-  const pelicula = peliculas[req.params.id];
+  const pelicula = peliculas.find(p => p.id === parseInt(req.params.id));
   if (!pelicula) return res.status(404).json({ error: 'Película no encontrada' });
   res.json(pelicula);
-};
+}
 
-exports.crearPelicula = (req, res) => {
+export function crearPelicula(req, res) {
   const peliculas = leerPeliculas();
-  peliculas.push(req.body);
+  const nuevaPelicula = {
+    id: peliculas.length ? peliculas[peliculas.length - 1].id + 1 : 1,
+    ...req.body
+  };
+  peliculas.push(nuevaPelicula);
   guardarPeliculas(peliculas);
-  res.status(201).json({ mensaje: 'Película agregada', pelicula: req.body });
-};
+  res.status(201).json({ mensaje: 'Película agregada', pelicula: nuevaPelicula });
+}
 
-exports.actualizarPelicula = (req, res) => {
+export function actualizarPelicula(req, res) {
   const peliculas = leerPeliculas();
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
+  const index = peliculas.findIndex(p => p.id === id);
 
-  if (!peliculas[id]) return res.status(404).json({ error: 'Película no encontrada' });
+  if (index === -1) return res.status(404).json({ error: 'Película no encontrada' });
 
-  peliculas[id] = { ...peliculas[id], ...req.body };
+  peliculas[index] = { ...peliculas[index], ...req.body };
   guardarPeliculas(peliculas);
-  res.json({ mensaje: 'Película actualizada', pelicula: peliculas[id] });
-};
+  res.json({ mensaje: 'Película actualizada', pelicula: peliculas[index] });
+}
 
-exports.borrarPelicula = (req, res) => {
+export function borrarPelicula(req, res) {
   const peliculas = leerPeliculas();
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
+  const index = peliculas.findIndex(p => p.id === id);
 
-  if (!peliculas[id]) return res.status(404).json({ error: 'Película no encontrada' });
+  if (index === -1) return res.status(404).json({ error: 'Película no encontrada' });
 
-  const eliminada = peliculas.splice(id, 1);
+  const eliminada = peliculas.splice(index, 1);
   guardarPeliculas(peliculas);
   res.json({ mensaje: 'Película eliminada', eliminada: eliminada[0] });
-};
+}

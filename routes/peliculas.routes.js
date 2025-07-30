@@ -1,12 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const {
-  getPeliculas,
-  getPeliculaPorId,
-  crearPelicula,
-  actualizarPelicula,
-  borrarPelicula
-} = require('../controllers/peliculas.controller');
+import { Router } from 'express';
+import { actualizarPelicula, borrarPelicula, crearPelicula, getPeliculaPorId, getPeliculas } from '../controllers/peliculas.controller.js';
+const router = Router();
 
 // GET todas las películas
 router.get('/', getPeliculas);
@@ -23,4 +17,4 @@ router.put('/:id', actualizarPelicula);
 // DELETE eliminar película
 router.delete('/:id', borrarPelicula);
 
-module.exports = router;
+export default router;

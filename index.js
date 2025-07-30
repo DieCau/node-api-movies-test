@@ -1,9 +1,9 @@
-const express = require('express');
+import express, { json } from 'express';
+import peliculasRoutes from './routes/peliculas.routes.js';
 const app = express();
-const peliculasRoutes = require('./routes/peliculas.routes');
 const PORT = 3000;
 
-app.use(express.json()); // Para leer JSON en requests
+app.use(json()); // Para leer JSON en requests
 
 app.use('/api/peliculas', peliculasRoutes);
 
