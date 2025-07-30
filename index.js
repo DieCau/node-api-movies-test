@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
+const peliculasRoutes = require('./routes/peliculas.routes');
 const PORT = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hola desde el backend con Express!');
-});
+app.use(express.json()); // Para leer JSON en requests
+
+app.use('/peliculas', peliculasRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
