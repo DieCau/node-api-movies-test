@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "titulo": "The Dark Knight",
+    "anio": 2008,
+    "genero": "Acción",
+    "director": "Christopher Nolan"
+  },
+  {
+    "id": 2,
+    "titulo": "Pulp Fiction",
+    "anio": 1994,
+    "genero": "Crimen",
+    "director": "Quentin Tarantino"
+  },
+  {
+    "id": 3,
+    "titulo": "Inception",
+    "anio": 2010,
+    "genero": "Ciencia Ficción",
+    "director": "Christopher Nolan"
+  },
+  {
+    "id": 4,
+    "titulo": "Forrest Gump",
+    "anio": 1994,
+    "genero": "Drama",
+    "director": "Robert Zemeckis"
+  },
+  {
+    "id": 5,
+    "titulo": "The Matrix",
+    "anio": 1999,
+    "genero": "Ciencia Ficción",
+    "director": "Lana y Lilly Wachowski"
+  },
+  {
+    "id": 6,
+    "titulo": "The Godfather",
+    "anio": 1972,
+    "genero": "Crimen",
+    "director": "Francis Ford Coppola"
+  },
+  {
+    "id": 7,
+    "titulo": "Parasite",
+    "anio": 2019,
+    "genero": "Thriller",
+    "director": "Bong Joon-ho"
+  },
+  {
+    "id": 8,
+    "titulo": "Interstellar",
+    "anio": 2014,
+    "genero": "Ciencia Ficción",
+    "director": "Christopher Nolan"
+  },
+  {
+    "id": 9,
+    "titulo": "The Shawshank Redemption",
+    "anio": 1994,
+    "genero": "Drama",
+    "director": "Frank Darabont"
+  },
+  {
+    "id": 10,
+    "titulo": "Gladiator",
+    "anio": 2000,
+    "genero": "Acción",
+    "director": "Ridley Scott"
+  }
+]
