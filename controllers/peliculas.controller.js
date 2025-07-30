@@ -1,13 +1,15 @@
 const fs = require('fs');
-const path = './movies.json';
+const path = require('path')
+
+const filePath = path.join(__dirname, '../data/peliculas.json');
 
 const leerPeliculas = () => {
-  const data = fs.readFileSync(path, 'utf-8');
+  const data = fs.readFileSync(filePath, 'utf-8');
   return JSON.parse(data);
 };
 
 const guardarPeliculas = (peliculas) => {
-  fs.writeFileSync(path, JSON.stringify(peliculas, null, 2));
+  fs.writeFileSync(filePath, JSON.stringify(peliculas, null, 2));
 };
 
 exports.getPeliculas = (req, res) => {
